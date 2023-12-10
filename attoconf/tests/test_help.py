@@ -15,13 +15,13 @@
 #   You should have received a copy of the GNU General Public License
 #   along with attoconf.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function, division, absolute_import
+
 
 import unittest
 
 from attoconf.help import Help, HelpSection, put_line_in_width
 
-from cStringIO import StringIO
+from io import StringIO
 
 class TestHelpSection(unittest.TestCase):
     def test_basic(self):

@@ -15,7 +15,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with attoconf.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function, division, absolute_import
+
 
 from .core import Project, Build
 
@@ -26,7 +26,7 @@ class PolymorphicSlotMergerMetaclass(type):
             s = ()
             for b in bases:
                 s2 = b.__dict__.get('_merge_slots_', ())
-                if isinstance(s2, basestring):
+                if isinstance(s2, str):
                     s2 = (s2,)
                 s += s2
             s += dct.get('_merge_slots_', ())
@@ -48,12 +48,11 @@ class PolymorphicSlotMergerMetaclass(type):
 def add_slots(cls):
     return cls
 
-class ClassyProject(Project):
+class ClassyProject(Project, metaclass=PolymorphicSlotMergerMetaclass):
     ''' A more convenient, objectish, way of setting up a project.
     '''
     __slots__ = ()
     _merge_slots_ = ()
-    __metaclass__ = PolymorphicSlotMergerMetaclass
 
     def __init__(self, srcdir):
         super(ClassyProject, self).__init__(srcdir)

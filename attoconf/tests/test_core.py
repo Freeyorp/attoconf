@@ -15,7 +15,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with attoconf.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function, division, absolute_import
+
 
 import unittest
 
@@ -23,7 +23,7 @@ from attoconf.core import Project, Build
 from attoconf.types import uint, shell_word, shell_partial_word, maybe
 
 import os
-from cStringIO import StringIO
+from io import StringIO
 import sys
 
 class ReplacingStdout(object):
@@ -91,9 +91,9 @@ General:
     def test_path(self):
         proj = Project('foo/')
         build = Build(proj, 'bar/')
-        self.assertEquals(build.project.srcdir, 'foo')
-        self.assertEquals(build.builddir, 'bar')
-        self.assertEquals(build.relative_source(), '../foo')
+        self.assertEqual(build.project.srcdir, 'foo')
+        self.assertEqual(build.builddir, 'bar')
+        self.assertEqual(build.relative_source(), '../foo')
 
     def test_configure(self):
         def check_foo(bld, FOO):

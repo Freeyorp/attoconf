@@ -15,7 +15,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with attoconf.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function, division, absolute_import
+
 
 from hashlib import md5
 import os
@@ -26,7 +26,7 @@ from ..classy import ClassyProject
 def calc_hash(build):
     hash = md5()
     for var, val in sorted(build.vars.items()):
-        hash.update(('%s = %s\n' % (var, val)).encode('utf-8'))
+        hash.update(('%s = %s\n' % (var, val)).encode(encoding='UTF-8', errors='strict'))
     return hash.hexdigest()
 
 

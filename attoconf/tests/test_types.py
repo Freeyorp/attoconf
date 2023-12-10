@@ -15,7 +15,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with attoconf.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function, division, absolute_import
+
 
 import unittest
 
@@ -26,7 +26,7 @@ class TestEnum(unittest.TestCase):
         foobar = enum('foo', 'bar')
         foobar('foo')
         foobar('bar')
-        with self.assertRaisesRegexp(ValueError, "'baz' not in {foo, bar}"):
+        with self.assertRaisesRegex(ValueError, "'baz' not in {foo, bar}"):
             foobar('baz')
 
 class TestShell(unittest.TestCase):
