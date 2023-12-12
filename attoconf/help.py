@@ -109,23 +109,16 @@ class HelpSection(object):
 def detect_terminal_width(fd, DEFAULT_WIDTH=float('inf')):
     ''' Detect the width of a terminal.
     '''
-    if not isinstance(fd, int):
-        fd = getattr(fd, 'fileno', lambda: -1)()
-    if fd == -1:
-        return DEFAULT_WIDTH
+    import os
+    import shutil
 
-    import fcntl
-    import termios
-    try:
-        buf = fcntl.ioctl(fd, termios.TIOCGWINSZ, b'xx' * 4)
-    except IOError as e:
-        import errno
-        if e.errno != errno.ENOTTY:
-            raise
-        return DEFAULT_WIDTH
-    import struct
-    ws_row, ws_col, ws_xpixel, ws_ypixel = struct.unpack('HHHH', buf)
-    return ws_col
+    if isinstance(fd, int):
+        try:
+            return os.get_terminal_size(fd)
+        except OSError(...):
+            return DEFAULT_WIDTH
+    else:
+        return shutil.get_terminal_size(fallback=(DEFAULT_WIDTH, 24)).columns
 
 
 class Help(object):
