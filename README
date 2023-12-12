@@ -4,5 +4,5 @@ Principles:
 * Assume most build environments are sane, and ignore the rest.
 * In the face of ambiguity, refuse the temptation to guess.
 * Never automatically toggle features based on the build environment.
-* Written in python2 for easy editing and wide portability.
+* Written in python3 for easy editing and wide portability.
 * GPL, but this does not apply to the program being built.

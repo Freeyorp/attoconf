@@ -1,5 +1,6 @@
 #!/bin/sh -e
-python -m unittest discover "$@"
+python3 -m unittest discover "$@"
+
 mkdir -p demo-build
 cd demo-build
 ../demo-project/configure
