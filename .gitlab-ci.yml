@@ -1,0 +1,37 @@
+# Copied in from Moubootaur Legends's Hercules .gitlab-ci.yml
+stages:
+  - test
+
+variables: &base_vars
+  DEBIAN_COMMON_PACKAGES: make python3
+
+.prerequisites: &prerequisites
+  before_script:
+    - echo "Building demo project $CI_BUILD_NAME"
+    - uname -a
+    - apt-get update
+    - apt-get install -y -qq $INSTALL_PACKAGES $DEBIAN_COMMON_PACKAGES
+
+# Compilers
+  variables:
+    <<: *base_vars
+
+re:debian-stable:
+  <<: *prerequisites
+  stage: test
+  image: debian:stable
+  variables:
+    <<: *base_vars
+    INSTALL_PACKAGES: gcc
+  script:
+    - ./test-everything.sh
+
+re:debian-testing:
+  <<: *prerequisites
+  stage: test
+  image: debian:testing
+  variables:
+    <<: *base_vars
+    INSTALL_PACKAGES: gcc
+  script:
+    - ./test-everything.sh
