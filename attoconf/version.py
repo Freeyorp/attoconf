@@ -21,8 +21,8 @@ import sys
 
 from . import _version
 
-if sys.version_info[0] != 2 or sys.version_info[1] < 7:
-    sys.exit('Unsupported Python version: %s\nattoconf requires Python 2.7' % sys.version)
+if sys.version_info[0] < 3 or (sys.version_info[0] == 3 and sys.version_info[1] < 6):
+    sys.exit('Unsupported Python version: %s\nattoconf requires Python 3.6' % sys.version)
 
 def require_version(major, minor, patch=0):
     ''' Check that this is the right version of attoconf, or die trying.

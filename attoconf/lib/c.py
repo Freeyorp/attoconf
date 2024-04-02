@@ -44,7 +44,7 @@ class TempFile:
     def __init__(self, filename, content):
         self.filename = filename
         if content is not None:
-            with open(filename, 'wx') as of:
+            with open(filename, 'x') as of:
                 of.write(content)
         else:
             # TODO: raise OSError(errno.EEXIST) if file already exists

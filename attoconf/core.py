@@ -140,7 +140,7 @@ class Project(object):
         self.help.print(sys.stdout, hidden)
         sys.exit()
 # sneaky
-Project.do_help.im_func.__module__ = 'attoconf.types'
+Project.do_help.__module__ = 'attoconf.types'
 
 class Build(object):
     ''' A Build is a directory and set of options applied to a Project.
@@ -157,7 +157,7 @@ class Build(object):
         self.project = project
         self.builddir = trim_trailing_slashes(builddir)
         self.vars = {as_var(k): o.init
-                for (k, o) in project.options.iteritems()}
+                for (k, o) in project.options.items()}
         self._seen_args = OrderedDict()
 
     def apply_arg(self, arg):
@@ -196,7 +196,7 @@ class Build(object):
             check(self)
         status_file = os.path.join(self.builddir, 'config.status')
         # open fd to control +x mode
-        status_fd = os.open(status_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0777)
+        status_fd = os.open(status_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o0777)
         with os.fdopen(status_fd, 'w') as status:
             print('Generating config.status')
             status.write('#!%s\n' % sys.executable)
@@ -205,7 +205,7 @@ class Build(object):
             status.write('old_build_dir = os.path.dirname(sys.argv[0])\n')
             status.write('configure = os.path.join(old_build_dir, %r, "configure")\n'
                     % self.relative_source())
-            seen_args = ['='.join(kv) for kv in self._seen_args.iteritems()]
+            seen_args = ['='.join(kv) for kv in self._seen_args.items()]
             status.write('os.execvp(configure, [configure] + %r + sys.argv[1:])\n'
                     % seen_args)
 

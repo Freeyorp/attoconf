@@ -25,8 +25,8 @@ from ..classy import ClassyProject
 
 def calc_hash(build):
     hash = md5()
-    for var, val in sorted(build.vars.iteritems()):
-        hash.update('%s = %s\n' % (var, val))
+    for var, val in sorted(build.vars.items()):
+        hash.update(('%s = %s\n' % (var, val)).encode('utf-8'))
     return hash.hexdigest()
 
 
