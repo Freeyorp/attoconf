@@ -38,7 +38,7 @@ class TemplateHook(object):
             print('Generating %s from %s' % (outfile, infile))
             # by replacing all instances of @VARIABLE@ with the value
 
-            with open(os.path.join(build.project.srcdir, infile)) as infile:
+            with open(os.path.join(build.project.srcdir, infile), encoding="utf-8") as infile:
                 slurpee = infile.read()
                 for var in build.project.order:
                     if var is None:
@@ -50,7 +50,7 @@ class TemplateHook(object):
                     if var in unseen:
                         unseen.remove(var)
                     slurpee = slurpee.replace(key, str(val))
-                with open(os.path.join(build.builddir, outfile), 'w') as out:
+                with open(os.path.join(build.builddir, outfile), 'w', encoding="utf-8") as out:
                     out.write(slurpee)
         if unseen:
             print('WARNING: variables not used:')
