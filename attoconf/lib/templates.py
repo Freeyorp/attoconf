@@ -50,6 +50,10 @@ class TemplateHook(object):
                     if var in unseen:
                         unseen.remove(var)
                     slurpee = slurpee.replace(key, str(val))
+                # Ensure that the parent directory of the output file exists
+                outdir = os.path.dirname(os.path.join(build.builddir, outfile))
+                if not os.path.exists(outdir):
+                    os.makedirs(outdir)
                 with open(os.path.join(build.builddir, outfile), 'w', encoding="utf-8") as out:
                     out.write(slurpee)
         if unseen:
