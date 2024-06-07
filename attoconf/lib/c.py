@@ -264,7 +264,7 @@ class C(Link, Preprocess):
                 type=ShellList, check=cc,
                 help='C compiler command', hidden=False,
                 help_def='HOST-gcc')
-        self.add_option('CFLAGS', init=['-O2', '-g'],
+        self.add_option('CFLAGS', init=['-O2', '-ggdb'],
                 type=ShellList, check=cflags,
                 help='C compiler flags', hidden=False)
 
@@ -276,6 +276,6 @@ class Cxx(Link, Preprocess):
                 type=ShellList, check=cxx,
                 help='C++ compiler command', hidden=False,
                 help_def='HOST-g++')
-        self.add_option('CXXFLAGS', init=['-O2', '-g'],
+        self.add_option('CXXFLAGS', init=['-O2', '-ggdb'],
                 type=ShellList, check=cxxflags,
                 help='C++ compiler flags', hidden=False)
