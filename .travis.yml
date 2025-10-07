@@ -1,7 +1,7 @@
 sudo: false
 language: python
 python:
-  - "3.11"
+  - "3.13"
   - "pypy"
 install: ":"
 script: ./test-everything.sh

@@ -18,8 +18,7 @@
 
 
 import os
-from pipes import quote as shell_quote
-from shlex import split as shell_split
+from shlex import split as shell_split, quote as shell_quote
 
 from .core import trim_trailing_slashes
 
